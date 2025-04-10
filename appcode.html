@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appcode</title>
+
+  <link rel="stylesheet" href="appcode.css">
+
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Personal Information</h2>
+  <form id="infoForm">
+    <!-- Existing form fields -->
+    <!-- Add your form fields here -->
+
+     Mobile number field
+    <div class="form-group">
+      <label for="mobileNumber">Mobile Number</label>
+      <input type="text" id="mobileNumber" required>
+    </div>
+
+    <div class="form-buttons">
+      <input type="submit" value="Submit">
+      <input type="reset" value="Cancel">
+    </div>
+  </form>
+</div>
+
+<div class="popup-container" id="popupContainer">
+  <div class="popup">
+    <h3>Enter App Code</h3>
+    <p>Lead Ref No.: <span id="leadRefNo"></span></p>
+    <p>Application No.: <span id="applicationNo"></span></p>
+    <p>Mobile No.: <span id="displayMobileNo"></span> <input type="text" id="appCodeInput" placeholder="Enter Application Code" maxlength="6"></p>
+    <div class="popup-buttons">
+      <button id="confirmButton">Submit</button>
+      <button id="cancelButton">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="appcode.js"></script>
+
+</body>
+</html>

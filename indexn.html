@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POWER PLAY</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .login-container img {
+            width: 100%;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container input[type="submit"] {
+            width: 90%;
+            padding: 10px;
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-container input[type="submit"]:hover {
+            background-color: #0041a1;
+        }
+        .login-container a {
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-container .register {
+            margin-top: 15px;
+        }
+        .bottom-banner {
+            background-color: #d3d3d3; /* Light grey color */
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+        .bottom-banner a {
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+
+    <script src="script.js"></script>
+</head>
+<body>
+<div class="login-container">
+<!--    <img src="logo.png" alt="SBI Card">-->
+<!--    <img src="https://ibb.co/pRDRjVZ" alt="powerimage">-->
+    <a href="#"><img src="https://i.ibb.co/4YyYRvM/photo-6230830862035959660-m.jpg" alt="POWER PLAY" border="0" /></a>
+
+    <form action="/login" method="POST">
+        <input type="text" placeholder="User ID" name="userID" required>
+        <input type="password" placeholder="MPIN" name="mpin" required>
+        <input type="submit" value="Sign In">
+    </form>
+    <div>
+        <a href="#">Forgot your MPIN?</a> | <a href="#">View / Modify Association</a>
+    </div>
+    <div class="register">
+        <p>Don't have an account? <a href="#">Register</a></p>
+    </div>
+</div>
+
+<div class="bottom-banner">
+    <p>Version 4.1</p>
+</div>
+</body>
+</html>
