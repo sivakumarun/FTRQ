@@ -11,7 +11,6 @@
             const leadRefNo = Math.floor(1000 + Math.random() * 9000);
             const applicationNo = Math.floor(100000 + Math.random() * 900000);
 
-            alert("Lead Reference Number: " + leadRefNo + "\nApplication Number: " + applicationNo);
 
             // Show the pop-up after the loader animation
             document.getElementById("popupContainer").style.display = "flex";

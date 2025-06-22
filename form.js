@@ -26,7 +26,7 @@
         }
       )
         .then(function (response) {
-          // Check if the request was successful
+          // Check if the request was succe000ssful
           if (response) {
             return response; // Assuming your script returns JSON response
           } else {
