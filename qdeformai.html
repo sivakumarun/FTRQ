@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SBI Card Application Form</title>
+  <link rel="stylesheet" href="appcode.css">
+</head>
+<body>
+
+<div class="form-container">
+  <h2>SBI Card </h2>
+  <form id="infoForm">
+     Personal Information Section
+    <div class="form-group">
+      <label for="salutation">*Select Salutation</label>
+      <select id="salutation" name="salutation" required>
+        <option value="">Select Salutation</option>
+        <option value="Mr">Mr.</option>
+        <option value="Ms">Ms.</option>
+        <option value="Mrs">Mrs.</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">*First Name</label>
+      <input type="text" id="firstName" name="firstName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="middleName">Middle Name</label>
+      <input type="text" id="middleName" name="middleName">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="dob">*DOB as per PAN card</label>
+      <input type="date" id="dob" name="dob" required>
+    </div>
+
+    <div class="form-group">
+      <label for="nameOnPAN">Name on PAN Card</label>
+      <input type="text" id="nameOnPAN" name="nameOnPAN" required>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="manualVipTag" name="manualVipTag">
+      <label for="manualVipTag">Manual VIP Tag</label>
+    </div>
+
+    <div class="form-group">
+      <label for="pan">*PAN</label>
+      <input type="text" id="pan" name="pan" required>
+      <button type="button">PAN Dedup</button>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="cardTypeDeviation" name="cardTypeDeviation">
+      <label for="cardTypeDeviation">Card Type Deviation</label>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="form60" name="form60">
+      <label for="form60">Form 60</label>
+    </div>
+
+    <div class="form-group">
+      <label for="vvipCategory">Select VVIP Category</label>
+      <select id="vvipCategory" name="vvipCategory">
+        <option value="">Select Category</option>
+        <!-- Add more categories as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="fathersName">Father's Name</label>
+      <input type="text" id="fathersName" name="fathersName">
+    </div>
+
+    <div class="form-group">
+      <label for="mothersName">*Mother's Name</label>
+      <input type="text" id="mothersName" name="mothersName">
+    </div>
+
+    <div class="form-group">
+      <label for="nationality">*Nationality</label>
+      <select id="nationality" name="nationality">
+        <option value="">Select Nationality</option>
+        <!-- Add more nationalities as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="houseNo">*House No.</label>
+      <input type="text" id="houseNo" name="houseNo">
+    </div>
+
+    <div class="form-group">
+      <label for="locality">*Locality/Society</label>
+      <input type="text" id="locality" name="locality">
+    </div>
+
+    <div class="form-group">
+      <label for="addressline2">Address Line 2</label>
+      <input type="text" id="addressline2" name="addressline2">
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="oclPolicyDeviation" name="oclPolicyDeviation">
+      <label for="oclPolicyDeviation">OCL Policy Deviation</label>
+    </div>
+
+    <div class="form-group">
+      <label for="pinCode">*Pin Code</label>
+      <input type="text" id="pinCode" name="pinCode">
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="oclPolicyDeviation" name="oclPolicyDeviation">
+      <label for="oclPolicyDeviation">OCL Policy Deviation</label>
+    </div>
+
+    <div class="form-group">
+      <label for="residenceCity">Residence City</label>
+      <select id="residenceCity" name="residenceCity">
+        <option value="">Select City</option>
+        <!-- Add more cities as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="stdCode">STD Code</label>
+      <input type="text" id="stdCode" name="stdCode">
+    </div>
+
+    <div class="form-group">
+      <label for="mobileNumber">*Mobile Number</label>
+      <input type="text" id="mobileNumber" name="mobileNumber" required>
+    </div>
+
+    <div class="form-group">
+      <label for="residencePhone">Residence Phone</label>
+      <input type="text" id="residencePhone" name="residencePhone">
+    </div>
+
+    <div class="form-group">
+      <label for="email">*E-Mail</label>
+      <input type="email" id="email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="domain">*Select Domain</label>
+      <select id="domain" name="domain">
+        <option value="">Select Domain</option>
+        <!-- Add more domains as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="ckycId">CKYC ID</label>
+      <input type="text" id="ckycId" name="ckycId">
+    </div>
+
+    <!-- Additional Personal Information Section -->
+
+    <h3>Additional Personal Information</h3>
+    <div class="form-group">
+      <label for="occupationType">Select Occupation Type</label>
+      <select id="occupationType" name="occupationType">
+        <option value="">Select Occupation Type</option>
+        <!-- Add more occupation types as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" name="companyName">
+    </div>
+
+    <div class="form-group">
+      <label for="designation">Designation</label>
+      <input type="text" id="designation" name="designation">
+    </div>
+
+<!--    <div class="form-group">-->
+<!--      <label for="gstNumber">GST Number</label>-->
+<!--      <input type="text" id="gstNumber" name="gstNumber">-->
+<!--    </div>-->
+
+    <div class="form-group">
+      <label for="officeEmail">Office Email</label>
+      <input type="email" id="officeEmail" name="officeEmail">
+    </div>
+
+    <div class="form-group">
+      <label for="document">Select Document</label>
+      <select id="document" name="document">
+        <option value="">Select Document</option>
+        <!-- Add more document types as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="bankName">Select Bank Name</label>
+      <select id="bankName" name="bankName">
+        <option value="">Select Bank Name</option>
+        <!-- Add more bank names as needed -->
+      </select>
+    </div>
+
+<!--    <div class="form-group">-->
+<!--      <label for="branchCode">Branch Code</label>-->
+<!--      <input type="text" id="branchCode" name="branchCode">-->
+<!--    </div>-->
+
+    <div class="form-group">
+      <label for="qdeBankName">Select Qde Bank Name</label>
+      <select id="qdeBankName" name="qdeBankName">
+        <option value="">Select Qde Bank Name</option>
+        <!-- Add more bank names as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input type="text" id="accountNumber" name="accountNumber">
+    </div>
+
+    <div class="form-group">
+      <label for="zone">*Select Zone</label>
+      <select id="zone" name="zone">
+        <option value="">Select Zone</option>
+        <!-- Add more zones as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="onBehalfOf" name="onBehalfOf">
+      <label for="onBehalfOf">On behalf of</label>
+    </div>
+
+    <div class="form-group">
+      <label for="seCode">SE Code</label>
+      <input type="text" id="seCode" name="seCode">
+    </div>
+
+    <div class="form-buttons">
+      <button type="button" onclick="goToNextPage()">Next</button>
+      <input type="reset" value="Reset">
+    </div>
+
+
+  </form>
+</div>
+
+<!-- Popup Container -->
+<div class="popup-container" id="popupContainer">
+  <div class="popup">
+    <h3>Application Code Confirmation</h3>
+    <input type="text" id="appCodeInput" placeholder="Enter Application Code">
+    <div class="popup-buttons">
+      <button id="confirmButton">Confirm</button>
+      <button id="cancelButton">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loader Container -->
+<div class="loader-container" id="loaderContainer">
+  <div class="loader"></div>
+</div>
+
+<script src="qdeform.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

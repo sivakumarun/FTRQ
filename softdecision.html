@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Soft Decision</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #f2f2f2;
+        }
+
+        .container {
+          max-width: 400px;
+          margin: 20px auto;
+          background: #fff;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+
+        .header {
+          background-color: #004aad;
+          color: #fff;
+          padding: 16px;
+          font-size: 20px;
+          font-weight: 600;
+          text-align: center;
+        }
+
+        .section {
+          padding: 16px;
+        }
+
+        .row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 12px;
+        }
+
+        .label {
+          flex: 1;
+          color: #444;
+          font-size: 14px;
+        }
+
+        .value {
+          flex: 1;
+          color: #000;
+          text-align: left;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .radio-group {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          margin: 20px 0;
+        }
+
+        .radio-group label {
+          font-size: 16px;
+        }
+
+        .footer {
+          background: #f9f9f9;
+          padding: 16px;
+          text-align: center;
+        }
+
+        button {
+          background-color: #007bff;
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          font-size: 16px;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: #0056b3;
+        }
+
+        .loading {
+          text-align: center;
+          padding: 20px;
+          color: #666;
+        }
+
+        .error {
+          text-align: center;
+          padding: 20px;
+          color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">Soft Decision</div>
+    <div class="section">
+        <div class="row">
+            <span class="label">Application No:</span>
+            <span class="value" id="applicationNo">Loading...</span>
+        </div>
+        <div class="row">
+            <span class="label">Lead Ref No:</span>
+            <span class="value" id="leadRefNo">Loading...</span>
+        </div>
+        <div class="row">
+            <span class="label">Soft Decision Status:</span>
+            <span class="value" id="decisionStatus">Approved</span>
+        </div>
+        <div class="row">
+            <span class="label">Credit Limit Range:</span>
+            <span class="value" id="creditLimitRange">Not Available</span>
+        </div>
+        <div class="row">
+            <span class="label">Credit Limit:</span>
+            <span class="value" id="creditLimit">Not Available</span>
+        </div>
+        <div class="row">
+            <span class="label">Eligible Card Types:</span>
+            <span class="value" id="eligibleCards">IRCTC SBI CARD ...More</span>
+        </div>
+        <div class="row">
+            <span class="label">Indicative Docs:</span>
+            <span class="value" id="indicativeDocs">Income program with minimum net salary INR 30000, ITR Program</span>
+        </div>
+        <div class="row">
+            <span class="label">Document Required:</span>
+            <span class="value" id="documentRequired">Yes</span>
+        </div>
+        <div class="row">
+            <span class="label">TELCO Status:</span>
+            <span class="value" id="telcoStatus">INITIATED</span>
+        </div>
+
+        <div class="radio-group">
+            <label><input type="radio" name="addon" value="yes"> Yes</label>
+            <label><input type="radio" name="addon" value="no" checked> No</label>
+        </div>
+    </div>
+    <div class="footer">
+        <button onclick="proceedToKYC()">Proceed for KYC</button>
+    </div>
+</div>
+
+<script>
+    // Function to get URL parameters
+    function getURLParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Function to load application data
+    function loadApplicationData() {
+        try {
+            // Try to get data from URL parameters first
+            const appNo = getURLParameter('applicationNo');
+            const leadRef = getURLParameter('leadRefNo');
+
+            if (appNo && leadRef) {
+                // Data from URL parameters
+                document.getElementById('applicationNo').textContent = appNo;
+                document.getElementById('leadRefNo').textContent = leadRef;
+                return;
+            }
+
+            // Try to get data from localStorage (fallback)
+            const storedAppNo = localStorage.getItem('applicationNo');
+            const storedLeadRef = localStorage.getItem('leadRefNo');
+
+            if (storedAppNo && storedLeadRef) {
+                document.getElementById('applicationNo').textContent = storedAppNo;
+                document.getElementById('leadRefNo').textContent = storedLeadRef;
+
+                // Clear localStorage after use
+                localStorage.removeItem('applicationNo');
+                localStorage.removeItem('leadRefNo');
+                return;
+            }
+
+            // If no data found, show error
+            document.getElementById('applicationNo').textContent = 'Not Available';
+            document.getElementById('leadRefNo').textContent = 'Not Available';
+
+        } catch (error) {
+            console.error('Error loading application data:', error);
+            document.getElementById('applicationNo').textContent = 'Error Loading';
+            document.getElementById('leadRefNo').textContent = 'Error Loading';
+        }
+    }
+
+    // Function to simulate soft decision processing
+    function processsoftDecision() {
+        // Simulate processing based on application data
+        const applicationNo = document.getElementById('applicationNo').textContent;
+
+        if (applicationNo && applicationNo !== 'Loading...' && applicationNo !== 'Not Available') {
+            // Simulate decision logic
+            const decisions = ['Approved', 'Pending', 'Under Review'];
+            const randomDecision = decisions[Math.floor(Math.random() * decisions.length)];
+
+            document.getElementById('decisionStatus').textContent = randomDecision;
+
+            // Update other fields based on decision
+            if (randomDecision === 'Approved') {
+                document.getElementById('creditLimitRange').textContent = 'INR 50,000 - INR 2,00,000';
+                document.getElementById('creditLimit').textContent = 'INR 1,00,000';
+                document.getElementById('telcoStatus').textContent = 'VERIFIED';
+            } else if (randomDecision === 'Pending') {
+                document.getElementById('creditLimitRange').textContent = 'Under Evaluation';
+                document.getElementById('creditLimit').textContent = 'Under Evaluation';
+                document.getElementById('telcoStatus').textContent = 'PENDING';
+            }
+        }
+    }
+
+    // Function to handle KYC proceed
+    function proceedToKYC() {
+        const applicationNo = document.getElementById('applicationNo').textContent;
+        const leadRefNo = document.getElementById('leadRefNo').textContent;
+        const decisionStatus = document.getElementById('decisionStatus').textContent;
+
+        if (decisionStatus === 'Approved') {
+            alert(`Proceeding to KYC for Application No: ${applicationNo}`);
+            // Here you can redirect to KYC page or perform other actions
+            // window.location.href = 'kyc.html?applicationNo=' + applicationNo + '&leadRefNo=' + leadRefNo;
+        } else {
+            alert('Application is not approved yet. Please wait for approval.');
+        }
+    }
+
+    // Load data when page loads
+    window.addEventListener('load', function() {
+        loadApplicationData();
+
+        // Process soft decision after a short delay
+        setTimeout(processsoftDecision, 1000);
+    });
+
+    // Alternative method to receive data via postMessage (for same-origin communication)
+    window.addEventListener('message', function(event) {
+        if (event.origin !== window.location.origin) return;
+
+        if (event.data.type === 'APPLICATION_DATA') {
+            document.getElementById('applicationNo').textContent = event.data.applicationNo;
+            document.getElementById('leadRefNo').textContent = event.data.leadRefNo;
+
+            // Process soft decision
+            setTimeout(processsoftDecision, 500);
+        }
+    });
+</script>
+
+</body>
+</html>

