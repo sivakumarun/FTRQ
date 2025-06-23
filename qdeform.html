@@ -327,7 +327,7 @@
       backdrop-filter: blur(10px);
       transition: left 0.3s ease;
       z-index: 1000;
-      padding: 20px 0;
+      padding: 50px 0 20px 0; /* Add top padding for close button */
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     }
     .side-menu.open {
@@ -340,6 +340,11 @@
       font-size: 30px;
       cursor: pointer;
       color: #333;
+      z-index: 1101;
+      background: white;
+      border-radius: 50%;
+      padding: 0 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     .side-menu a {
       display: block;
@@ -348,6 +353,9 @@
       text-decoration: none;
       border-bottom: 1px solid #eee;
       transition: background-color 0.2s ease;
+    }
+    .side-menu a:first-child {
+      margin-top: 10px; /* Extra space for Home link */
     }
     .side-menu a:hover {
       background-color: rgba(102, 126, 234, 0.1);
@@ -365,6 +373,10 @@
       border-radius: 50%;
       padding: 5px 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: block;
+    }
+    .side-menu.open ~ .menu-icon {
+      display: none;
     }
     .menu-overlay {
       display: none;
@@ -383,6 +395,7 @@
       .side-menu {
         width: 280px;
         left: -280px;
+        padding-top: 50px;
       }
     }
   </style>
@@ -390,9 +403,9 @@
 <body>
 
 <!-- Side Menu Trigger Icon -->
-<span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+<span class="menu-icon" id="menuIcon" onclick="toggleMenu()">&#9776;</span>
 
-<!-- Side Menu (copied from index.html) -->
+<!-- Side Menu -->
 <div class="side-menu" id="sideMenu">
   <span class="close-btn" onclick="toggleMenu()">&times;</span>
   <a href="index.html">Home</a>
@@ -787,12 +800,20 @@
           submitBtn.disabled = true;
           submitBtn.textContent = 'Submitting...';
 
+ // Get the generated numbers
+
+          const leadRefNo = document.getElementById('leadRefNo').textContent;
+
+          const applicationNo = document.getElementById('applicationNo').textContent;
           // Collect all form data
           const formData = new FormData(document.getElementById('sbiCardForm'));
 
           // Add popup-specific data
-          formData.append('leadRefNo', document.getElementById('leadRefNo').textContent);
-          formData.append('applicationNo', document.getElementById('applicationNo').textContent);
+<!--          formData.append('leadRefNo', document.getElementById('leadRefNo').textContent);-->
+<!--          formData.append('applicationNo', document.getElementById('applicationNo').textContent);-->
+formData.append('leadRefNo', leadRefNo);
+
+          formData.append('applicationNo', applicationNo);
           formData.append('appCode', appCode);
 
           // Convert FormData to key-value pairs string (like your working code)
@@ -824,9 +845,14 @@
               const applicationNo = document.getElementById('applicationNo').textContent;
               alert('Application Submitted Successfully with Application No: ' + applicationNo);
 
-              // Close popup and reset form
-              document.getElementById('popupOverlay').style.display = 'none';
-              document.getElementById('sbiCardForm').reset();
+<!--              // Close popup and reset form-->
+<!--              document.getElementById('popupOverlay').style.display = 'none';-->
+<!--              document.getElementById('sbiCardForm').reset();-->
+// Redirect to soft decision page with URL parameters
+
+              const softDecisionUrl = `softdecision.html?applicationNo=${encodeURIComponent(applicationNo)}&leadRefNo=${encodeURIComponent(leadRefNo)}`;
+
+              window.location.href = softDecisionUrl;
           })
           .catch(function (error) {
               // Handle errors
@@ -903,12 +929,15 @@
   function toggleMenu() {
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
+    const menuIcon = document.getElementById('menuIcon');
     if (sideMenu.classList.contains('open')) {
       sideMenu.classList.remove('open');
       overlay.classList.remove('show');
+      menuIcon.style.display = 'block';
     } else {
       sideMenu.classList.add('open');
       overlay.classList.add('show');
+      menuIcon.style.display = 'none';
     }
   }
 
