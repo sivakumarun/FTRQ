@@ -179,12 +179,12 @@
     }
 
     .check-in-btn {
-      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      background: linear-gradient(135deg, #ADD8E6 0%, #FFFFFF 100%);
       color: white;
     }
 
     .skip-btn {
-      background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
+      background: linear-gradient(135deg, #ADD8E6 0%, #7ac6ff 100%);
       color: white;
     }
 
@@ -440,8 +440,11 @@
   </div>
 
   <div class="action-buttons" id="actionButtons">
+<!--    <button class="action-btn check-in-btn" onclick="markAttendance()">-->
+<!--      <span>📍</span> Mark Attendance-->
+<!--    </button>-->
     <button class="action-btn check-in-btn" onclick="markAttendance()">
-      <span>📍</span> Mark Attendance
+      <img src="images/checkin.png" alt="Mark Attendance" style="height: 100px; vertical-align: middle;">
     </button>
     <button class="action-btn skip-btn" onclick="skipAttendance()">
       <span>⏭️</span> Skip
@@ -452,8 +455,18 @@
   <div class="card-selection" id="cardSelection">
     <h2>Select Your Card</h2>
 
+<!--    <div class="card-item">-->
+<!--      <div class="card-image">Apollo SBI Card</div>-->
+<!--      <div class="card-info">-->
+<!--        <div class="card-name">Apollo SBI Card on Rupay</div>-->
+<!--        <div class="card-type">Rupay Network</div>-->
+<!--      </div>-->
+<!--      <button class="apply-btn" onclick="window.location.href='qdeform.html'">Apply Now</button>-->
+<!--    </div>-->
     <div class="card-item">
-      <div class="card-image">Apollo SBI Card</div>
+      <div class="card-image">
+        <img src="images/apollo-sbi-card.png" alt="Apollo SBI Card" style="max-width:80px; max-height:50px; object-fit: contain;" />
+      </div>
       <div class="card-info">
         <div class="card-name">Apollo SBI Card on Rupay</div>
         <div class="card-type">Rupay Network</div>
@@ -462,7 +475,9 @@
     </div>
 
     <div class="card-item">
-      <div class="card-image">BPCL SBI Card</div>
+      <div class="card-image">
+        <img src="images/bpcl-sbi-card.png" alt="BPCL SBI Card" style="max-width:80px; max-height:50px; object-fit: contain;" />
+      </div>
       <div class="card-info">
         <div class="card-name">BPCL SBI Card on RuPay</div>
         <div class="card-type">Rupay Network</div>
@@ -471,7 +486,9 @@
     </div>
 
     <div class="card-item">
-      <div class="card-image">BPCL OCTANE</div>
+      <div class="card-image">
+        <img src="images/bpcl-sbi-card.png" alt="BPCL OCTANE Card" style="max-width:80px; max-height:50px; object-fit: contain;" />
+      </div>
       <div class="card-info">
         <div class="card-name">BPCL SBI Card OCTANE on VISA</div>
         <div class="card-type">VISA Network</div>
@@ -480,16 +497,20 @@
     </div>
 
     <div class="card-item">
-      <div class="card-image">SimplySAVE</div>
+      <div class="card-image">
+        <img src="images/SimplySave-sbi-card.png" alt="SimplySave" style="max-width:80px; max-height:50px; object-fit: contain;" />
+      </div>
       <div class="card-info">
-        <div class="card-name">CBI SimplySAVE SBI Card on VISA</div>
+        <div class="card-name">SBI SimplySAVE SBI Card on VISA</div>
         <div class="card-type">VISA Network</div>
       </div>
       <button class="apply-btn" onclick="window.location.href='qdeform.html'">Apply Now</button>
     </div>
 
     <div class="card-item">
-      <div class="card-image">SimplyClick</div>
+      <div class="card-image">
+        <img src="images/SimplyClick-sbi-card.png" alt="SimplyClick" style="max-width:80px; max-height:50px; object-fit: contain;" />
+      </div>
       <div class="card-info">
         <div class="card-name">SBICard SimplyClick on Mastercard</div>
         <div class="card-type">Mastercard Network</div>
