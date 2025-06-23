@@ -692,26 +692,22 @@
           submitBtn.disabled = true;
           submitBtn.textContent = 'Submitting...';
 
-          // Get the generated numbers
-          const leadRefNo = document.getElementById('leadRefNo').textContent;
-          const applicationNo = document.getElementById('applicationNo').textContent;
-
           // Collect all form data
           const formData = new FormData(document.getElementById('sbiCardForm'));
 
           // Add popup-specific data
-          formData.append('leadRefNo', leadRefNo);
-          formData.append('applicationNo', applicationNo);
+          formData.append('leadRefNo', document.getElementById('leadRefNo').textContent);
+          formData.append('applicationNo', document.getElementById('applicationNo').textContent);
           formData.append('appCode', appCode);
 
-          // Convert FormData to key-value pairs string
+          // Convert FormData to key-value pairs string (like your working code)
           var keyValuePairs = [];
           for (var pair of formData.entries()) {
               keyValuePairs.push(pair[0] + "=" + pair[1]);
           }
           var formDataString = keyValuePairs.join("&");
 
-          // Submit to Google Sheets
+          // Submit to Google Sheets using your working approach
           fetch('https://script.google.com/macros/s/AKfycbzA29vURSVA7n5TTnlxxtC43tCEtotSoLDfmC3ZwM_YLcR6vUQkrbD49viZs4DBHjja/exec', {
               redirect: "follow",
               method: "POST",
@@ -721,21 +717,24 @@
               },
           })
           .then(function (response) {
+              // Check if the request was successful
               if (response) {
-                  return response;
+                  return response; // Assuming your script returns JSON response
               } else {
                   throw new Error("Failed to submit the form.");
               }
           })
           .then(function (data) {
-              // Success - redirect to soft decision page with parameters
+              // Success - show success message with application number
+              const applicationNo = document.getElementById('applicationNo').textContent;
               alert('Application Submitted Successfully with Application No: ' + applicationNo);
 
-              // Redirect to soft decision page with URL parameters
-              const softDecisionUrl = `softdecision.html?applicationNo=${encodeURIComponent(applicationNo)}&leadRefNo=${encodeURIComponent(leadRefNo)}`;
-              window.location.href = softDecisionUrl;
+              // Close popup and reset form
+              document.getElementById('popupOverlay').style.display = 'none';
+              document.getElementById('sbiCardForm').reset();
           })
           .catch(function (error) {
+              // Handle errors
               console.error('Error submitting form:', error);
               alert('An error occurred while submitting the form. Please try again.');
           })
