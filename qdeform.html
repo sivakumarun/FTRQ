@@ -315,9 +315,104 @@
         color: #6c757d;
         font-size: 12px;
     }
+
+    /* Side Menu Styles (copied from index.html, minimal for menu) */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      transition: left 0.3s ease;
+      z-index: 1000;
+      padding: 20px 0;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+    .side-menu.open {
+      left: 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #333;
+    }
+    .side-menu a {
+      display: block;
+      padding: 15px 20px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s ease;
+    }
+    .side-menu a:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+    }
+    .menu-icon {
+      font-size: 24px;
+      color: #2E86AB;
+      cursor: pointer;
+      margin-right: 15px;
+      position: fixed;
+      top: 25px;
+      left: 20px;
+      z-index: 1100;
+      background: white;
+      border-radius: 50%;
+      padding: 5px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .menu-overlay.show {
+      display: block;
+    }
+    @media (max-width: 480px) {
+      .side-menu {
+        width: 280px;
+        left: -280px;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- Side Menu Trigger Icon -->
+<span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+
+<!-- Side Menu (copied from index.html) -->
+<div class="side-menu" id="sideMenu">
+  <span class="close-btn" onclick="toggleMenu()">&times;</span>
+  <a href="index.html">Home</a>
+  <a href="#">KYC Renewal Queue</a>
+  <a href="#">Search</a>
+  <a href="#">Doc Collection Queue</a>
+  <a href="#">Curing Queue</a>
+  <a href="#">App Code Queue</a>
+  <a href="#">RMN Mismatch Queue</a>
+  <a href="#">Doc Boy Queue</a>
+  <a href="#">Doc Boy Availability</a>
+  <a href="#">Doc Boy Dashboard</a>
+  <a href="#">LMS</a>
+  <a href="#">My Dashboard</a>
+  <a href="#">Attendance View</a>
+  <a href="#">SBI Connect</a>
+  <a href="#">Check Out</a>
+  <a href="index.html">Logout</a>
+</div>
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
 <div class="form-container">
   <div class="form-header">
@@ -803,7 +898,33 @@
   document.getElementById('pan').addEventListener('input', function(e) {
       this.value = this.value.toUpperCase();
   });
+
+  // Side Menu JS (copied/minimal from index.html)
+  function toggleMenu() {
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('menuOverlay');
+    if (sideMenu.classList.contains('open')) {
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+    } else {
+      sideMenu.classList.add('open');
+      overlay.classList.add('show');
+    }
+  }
+
+  // Optional: Close menu when clicking on menu items except Home/Logout
+  document.querySelectorAll('.side-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (
+        e.target.textContent !== 'Home' &&
+        e.target.textContent !== 'Logout'
+      ) {
+        toggleMenu();
+      }
+    });
+  });
 </script>
 
 </body>
 </html>
+
