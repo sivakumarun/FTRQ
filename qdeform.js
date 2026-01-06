@@ -36,28 +36,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loader.style.display = "flex";
 
-    fetch("https://script.google.com/macros/s/AKfycbzA29vURSVA7n5TTnlxxtC43tCEtotSoLDfmC3ZwM_YLcR6vUQkrbD49viZs4DBHjja/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbzuvY47oKhNV8wvhWcUjrjQTHDZk-pqCuPJj-jVaMMePc7h3fq0IYl9k9iDWCwcyr3oSA/exec", {
       method: "POST",
       body: formDataString,
       headers: {
         "Content-Type": "text/plain;charset=utf-8",
       },
     })
-    .then((response) => {
-      loader.style.display = "none";
-      if (response.ok) {
-        popupContainer.style.display = "none";
-        alert("Form submitted successfully!");
-        form.reset();
-      } else {
-        throw new Error("Submission failed.");
-      }
-    })
-    .catch((error) => {
-      loader.style.display = "none";
-      alert("An error occurred during submission.");
-      console.error(error);
-    });
+      .then((response) => {
+        loader.style.display = "none";
+        if (response.ok) {
+          popupContainer.style.display = "none";
+          alert("Form submitted successfully!");
+          form.reset();
+        } else {
+          throw new Error("Submission failed.");
+        }
+      })
+      .catch((error) => {
+        loader.style.display = "none";
+        alert("An error occurred during submission.");
+        console.error(error);
+      });
   });
 
   // Define goToNextPage function

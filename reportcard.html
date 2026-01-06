@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accuracy Report Card - SBI Card</title>
+    <link rel="stylesheet" href="reportcard.css">
+</head>
+
+<body>
+
+    <!-- Side Menu Trigger Icon -->
+    <span class="menu-icon" id="menuIcon" onclick="toggleMenu()">&#9776;</span>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+        <a href="index.html">Home</a>
+        <a href="#">KYC Renewal Queue</a>
+        <a href="#">Search</a>
+        <a href="#">Doc Collection Queue</a>
+        <a href="#">Curing Queue</a>
+        <a href="#">App Code Queue</a>
+        <a href="#">RMN Mismatch Queue</a>
+        <a href="#">Doc Boy Queue</a>
+        <a href="#">Doc Boy Availability</a>
+        <a href="#">Doc Boy Dashboard</a>
+        <a href="#">LMS</a>
+        <a href="#">My Dashboard</a>
+        <a href="#">Attendance View</a>
+        <a href="#">SBI Connect</a>
+        <a href="#">Check Out</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Accuracy Report Card</h1>
+            <p>Application Data Quality Assessment</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p>Analyzing your submission...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-state" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h2>Unable to Load Report</h2>
+            <p id="errorMessage"></p>
+            <button onclick="window.location.href='index.html'" class="btn btn-primary">Return to Home</button>
+        </div>
+
+        <!-- Report Content -->
+        <div id="reportContent" style="display: none;">
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <div class="score-circle" id="scoreCircle">
+                    <div class="score-value" id="scoreValue">--</div>
+                    <div class="score-label">Accuracy Score</div>
+                </div>
+                <div class="summary-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Application No:</span>
+                        <span class="detail-value" id="applicationNo">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Grade:</span>
+                        <span class="detail-value" id="grade">--</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">User ID:</span>
+                    <span class="detail-value" id="userID">--</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Submission Time:</span>
+                    <span class="detail-value" id="submissionTime">--</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Fields Matched:</span>
+                    <span class="detail-value" id="fieldsMatched">--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Message -->
+        <div class="performance-message" id="performanceMessage"></div>
+
+        <!-- Field Comparison Table -->
+        <div class="comparison-section">
+            <h2>📋 Field-by-Field Comparison</h2>
+            <p class="section-description">Detailed comparison between your submission and master data</p>
+
+            <div class="table-container">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Expected Value</th>
+                            <th>Your Value</th>
+                            <th>Status</th>
+                            <th>Similarity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Error Summary -->
+        <div class="error-summary" id="errorSummary" style="display: none;">
+            <h3>⚠️ Common Mistakes Found</h3>
+            <ul id="errorList"></ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button onclick="window.print()" class="btn btn-secondary">🖨️ Print Report</button>
+            <button onclick="window.location.href='qdeform.html'" class="btn btn-primary">📝 Submit New
+                Application</button>
+            <button onclick="window.location.href='index.html'" class="btn btn-secondary">🏠 Return to Home</button>
+        </div>
+    </div>
+    </div>
+
+    <script src="reportcard.js"></script>
+
+</body>
+
+</html>
